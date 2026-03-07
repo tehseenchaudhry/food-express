@@ -1,7 +1,7 @@
 import React from 'react';
 import CategoryFilter from '../component/Menu/CategoryFilter';
 import SortOptions from '../component/Menu/SortOptions';
-import Pagination from '../component/menu/Pagination';
+// import Pagination from '../component/menu/Pagination';
 import MenuCard from '../component/Menu/MenuCard';
 import MenuHero from '../component/Menu/MenuHero';
 import { useSelector } from 'react-redux';
