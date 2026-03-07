@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 
 const navItems = [
   { name: "Home", path: "/" },
-  { name: "Menu", path: "/Menu" },
+  { name: "Menu", path: "/menu" },
   { name: "About", path: "/about" },
   { name: "Contact", path: "/contact" },
 ];
