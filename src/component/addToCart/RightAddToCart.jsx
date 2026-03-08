@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { FaArrowRight } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
-const RightAddToCart = ({ subtotal, deliveryFee, total ,finalTotal}) => {
+const RightAddToCart = ({ subtotal, deliveryFee}) => {
   
   const [promoCode, setPromoCode] = useState("");
   const [discount, setDiscount] = useState(0);
