@@ -260,6 +260,20 @@ const initialState = {
         },
 
         //  BIRYANI 
+         {
+            id: 36,
+            name: "Cheesecake",
+            description: "Creamy New York style cheesecake",
+            price: 449,
+            discountedPrice: 399,
+            discount: 12,
+            rating: 4.9,
+            reviews: 345,
+            image: "https://images.unsplash.com/photo-1533134242443-d4fd215305ad?auto=format&fit=crop&w=400&q=80",
+            restaurant: "Dessert House",
+            category: "desserts",
+            veg: true,
+        },
         {
             id: 16,
             name: "Chicken Biryani",
@@ -627,34 +641,27 @@ const initialState = {
         },
 
         //  DESSERTS (6 items)
-        {
-            id: 35,
-            name: "Chocolate Brownie",
-            description: "Warm chocolate brownie with vanilla ice cream",
-            price: 399,
-            discountedPrice: 349,
-            discount: 15,
-            rating: 5.0,
-            reviews: 456,
-            image: "https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=400&q=80",
-            restaurant: "Dessert House",
-            category: "desserts",
+         {
+            id: 47,
+            name: "Pakola",
+            description: "Classic Pakistani creamy soda",
+            price: 99,
+            discountedPrice: 89,
+            discount: 10,
+            rating: 4.8,
+            reviews: 567,
+            image: "https://images.unsplash.com/photo-1625772299848-391b6a87d7b3?auto=format&fit=crop&w=400&q=80",
+            restaurant: "Coffee House",
+            category: "drinks",
             veg: true,
+            sizes: [
+                { name: "250 ml", price: 49, originalPrice: 54 },
+                { name: "500 ml", price: 89, originalPrice: 99 },
+                { name: "1.5 L", price: 149, originalPrice: 166 }
+            ]
         },
-        {
-            id: 36,
-            name: "Cheesecake",
-            description: "Creamy New York style cheesecake",
-            price: 449,
-            discountedPrice: 399,
-            discount: 12,
-            rating: 4.9,
-            reviews: 345,
-            image: "https://images.unsplash.com/photo-1533134242443-d4fd215305ad?auto=format&fit=crop&w=400&q=80",
-            restaurant: "Dessert House",
-            category: "desserts",
-            veg: true,
-        },
+      
+       
         {
             id: 37,
             name: "Kunafa",
@@ -827,25 +834,21 @@ const initialState = {
                 { name: "1 L", price: 399, originalPrice: 481 }
             ]
         },
-        {
-            id: 47,
-            name: "Pakola",
-            description: "Classic Pakistani creamy soda",
-            price: 99,
-            discountedPrice: 89,
-            discount: 10,
-            rating: 4.8,
-            reviews: 567,
-            image: "https://images.unsplash.com/photo-1625772299848-391b6a87d7b3?auto=format&fit=crop&w=400&q=80",
-            restaurant: "Coffee House",
-            category: "drinks",
+          {
+            id: 35,
+            name: "Chocolate Brownie",
+            description: "Warm chocolate brownie with vanilla ice cream",
+            price: 399,
+            discountedPrice: 349,
+            discount: 15,
+            rating: 5.0,
+            reviews: 456,
+            image: "https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=400&q=80",
+            restaurant: "Dessert House",
+            category: "desserts",
             veg: true,
-            sizes: [
-                { name: "250 ml", price: 49, originalPrice: 54 },
-                { name: "500 ml", price: 89, originalPrice: 99 },
-                { name: "1.5 L", price: 149, originalPrice: 166 }
-            ]
-        }
+        },
+       
     ],
 
     // searchbar

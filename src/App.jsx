@@ -18,7 +18,9 @@ import MainDashboard from './Dashboard/dashboardPages/MainDashboard'
 import Settings from './Dashboard/dashboardPages/Settings'
 import Delivery from './Dashboard/dashboardPages/Delivery'
 import Customers from './Dashboard/dashboardPages/Customers'
-import CheckoutPage from './pages/CheckoutPage'
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css';
+import Checkout from './pages/Checkout'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -35,7 +37,7 @@ function App() {
             <Route path='/about' element={<About />} />
             <Route path='/addcart' element={<AddToCart />} />
             <Route path='/contact' element={<Contact />} />
-            <Route path="/checkout" element={<CheckoutPage />} />
+            <Route path="/checkout" element={<Checkout />} />
           </Route>
 
           {/* Dashboard Routes - without Navbar & Footer */}
@@ -53,6 +55,21 @@ function App() {
           <Route path='/signup' element={<Signup />} />
           <Route path='/forgot-password' element={<ForgotPassword />} />
         </Routes>
+         <ToastContainer 
+        position="top-right"
+        autoClose={2000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+        style={{ top: "50px" }} 
+           toastStyle={{ backgroundColor: 'white' , color: "#9f1239" }}
+            // progressStyle={{ background: '#9f1239' }}
+      />
       </BrowserRouter>
     </>
   )

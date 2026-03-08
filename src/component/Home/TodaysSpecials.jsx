@@ -215,14 +215,14 @@ const TodaysSpecials = () => {
         </div>
 
         {/* View All Specials */}
-        <div className="text-center mt-12">
+        {/* <div className="text-center mt-12">
           <Link
             to="/menu"
             className="inline-flex items-center gap-2 px-8 py-3 bg-white text-rose-800 border-2 border-rose-800 rounded-full hover:bg-rose-800 hover:text-white transition-all duration-300 font-semibold group"
           >
             View All Specials
           </Link>
-        </div>
+        </div> */}
       </div>
     </section>
   );

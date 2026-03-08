@@ -37,9 +37,9 @@ const OurStory = () => {
             </div>
             
             {/* Floating Badge */}
-            <div className="absolute -bottom-6 -right-6 bg-rose-800 text-white p-6 rounded-2xl shadow-xl">
-              <FaHeart className="text-3xl mb-2" />
-              <div className="font-bold text-2xl">4.8</div>
+            <div className="absolute -bottom-6 lg:-right-6 -right-3 -bottm-3 bg-rose-800 text-white  p-2 rounded-2xl shadow-xl">
+              <FaHeart className="lg:text-3xl lg:mb-2" />
+              <div className="font-bold lg:text-2xl">4.8</div>
               <div className="text-sm">Customer Rating</div>
             </div>
           </div>

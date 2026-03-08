@@ -58,13 +58,13 @@ const WhyChooseUs = () => {
             />
             
             {/* Floating Badge */}
-            <div className="absolute -bottom-4 -left-4 bg-rose-800 text-white px-4 py-3 rounded-xl shadow-lg">
+            <div className="absolute -bottom-4 lg:-left-4 -left-2 bg-rose-800 text-white px-4 py-3 rounded-xl shadow-lg">
               <p className="text-xl font-bold leading-none">30 min</p>
               <p className="text-xs">Delivery</p>
             </div>
             
             {/* Rating Badge */}
-            <div className="absolute -top-4 -right-4 bg-white px-4 py-3 rounded-xl shadow-lg">
+            <div className="absolute -top-4 lg:-right-4 -right-2 border border-rose-800 bg-white px-4 py-3 rounded-xl shadow-lg">
               <p className="text-xl font-bold text-rose-800 leading-none">4.8★</p>
               <p className="text-xs text-gray-600">Rating</p>
             </div>

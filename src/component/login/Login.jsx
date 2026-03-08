@@ -55,7 +55,7 @@ const Login = () => {
                 <input
                   type="email"
                   name="email"
-                  required
+                  // required
                   placeholder="Enter your email"
                   className="w-full pl-10 pr-12 py-3 border rounded-xl focus:outline-none focus:ring-2 transition  focus:ring-red-200  border-gray-300 focus:border-rose-800 "
                 />
@@ -75,7 +75,7 @@ const Login = () => {
                 <input
                   type= "password"
                   name="password"
-                  required
+                  // required
                   placeholder="Enter your password"
                   className="w-full pl-10 pr-12 py-3 border rounded-xl focus:outline-none focus:ring-2 transition  focus:ring-red-200  border-gray-300 focus:border-rose-800 "
                 />

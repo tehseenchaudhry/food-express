@@ -67,7 +67,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
                onClick={() => setSidebarOpen(false)}
               className={({ isActive }) =>
                 `flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all text-sm font-medium
-                ${isActive ? "bg-white/30 text-white" : "text-rose-100 hover:bg-white/20"}`
+                ${isActive ? "bg-white/30 text-white" : "hover:bg-white/20"}`
               }
             >
               <item.icon className="text-xl flex-shrink-0" />
@@ -79,7 +79,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
         {/* Logout */}
         <div className="absolute bottom-0 left-0 right-0 px-3 py-2 bg-white/10  border-t border-rose-700">
           <button
-            onClick={() => navigate("/login")}
+            onClick={() => navigate("/")}
             className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-rose-100 hover:bg-white/30 w-full`}
           >
             <span className="text-sm font-medium">Logout</span>

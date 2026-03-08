@@ -40,9 +40,9 @@ const AboutHero = () => {
         </div>
 
         {/* RIGHT IMAGE - Border alag, image absolute */}
-        <div className="relative h-[450px] w-full">
+        <div className="relative h-[300px] lg:h-[450px] w-full">
           {/* Border Div */}
-          <div className="absolute top-10 right-10 w-full h-full border-2 border-rose-700 bg-rose-50 rounded-2xl "></div>
+          <div className="absolute top-10 right-3 lg:right-10  w-full h-full border-2 border-rose-700 bg-rose-50 rounded-2xl "></div>
           
           {/* Image Div - Absolute */}
           <div className="absolute top-0 left-0 w-full h-full">

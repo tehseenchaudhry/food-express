@@ -3,8 +3,9 @@ import { Link } from "react-router-dom";
 import { FaStar, FaTruck, FaClock } from "react-icons/fa";
 
 const HeroSection = () => {
+  
   return (
-    <section className="relative h-screen w-full overflow-hidden">
+    <section className="relative h-[70vh] lg:h-screen w-full overflow-hidden">
       {/* Video Background - Working Coverr Videos */}
       <video
         autoPlay
@@ -13,11 +14,7 @@ const HeroSection = () => {
         playsInline
         className="absolute top-0 left-0 w-full h-full object-cover"
       >
-       <source
-  src="https://media.gettyimages.com/id/1302311864/video/friendly-waiter-bringing-the-pizza-to-group-of-smiling-young-friends-at-the-table.mp4?s=mp4-640x640-gi&k=20&c=LxuC6hG7ppz-P4BPCQsiPnjWZ710ajIN30_oOtDZlvg="
-  type="video/mp4"
-/>
-
+        <source src="video.mp4" type="video/mp4" />
       </video>
 
       {/* Overlay - dark for text readability */}
@@ -29,9 +26,9 @@ const HeroSection = () => {
           
           {/* BADGE - H1 ke upar add kiya */}
           <div className="inline-flex items-center gap-2 bg-rose-800/20 backdrop-blur-sm px-4 py-2 rounded-full mb-6 border border-rose-800/30">
-            <FaStar className="text-yellow-400 text-sm" />
+            <FaStar className="text-rose-800 text-sm" />
             <span className="text-sm font-medium tracking-wider"> PREMIUM QUALITY FOOD</span>
-            <FaStar className="text-yellow-400 text-sm" />
+            <FaStar className="text-rose-800 text-sm" />
           </div>
 
           {/* Main Heading */}
