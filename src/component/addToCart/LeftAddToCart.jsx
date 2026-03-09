@@ -1,14 +1,38 @@
 import React from "react";
 import { FaTrash, FaMinus, FaPlus } from "react-icons/fa";
 import { motion, AnimatePresence } from "framer-motion";
+import { useDispatch, useSelector } from "react-redux";
+import { decQty, deleteItem, incQty } from "../../reduxToolkit/features/cartSlice";
 
-const LeftAddToCart = ({ 
-  cartItems, 
-  onIncreaseQty,
-  onDecreaseQty,
-  onRemoveItem,
-  getItemPrice
-}) => {
+const LeftAddToCart = () => {
+  const dispatch = useDispatch();
+  const cartItems = useSelector((state) => state.cart.items);
+
+  // Get current size for item
+  const getCurrentSize = (item) => {
+    return item.selectedSize || item.sizes?.[0] || { name: "Regular", price: item.price };
+  };
+
+  // Calculate item price based on selected size
+  const getItemPrice = (item) => {
+    const currentSize = getCurrentSize(item);
+    return currentSize.price * (item.quantity || 1);
+  };
+
+  // Handle quantity increase
+  const handleIncreaseQty = (itemId) => {
+    dispatch(incQty(itemId));
+  };
+
+  // Handle quantity decrease
+  const handleDecreaseQty = (itemId) => {
+    dispatch(decQty(itemId));
+  };
+
+  // Handle remove item
+  const handleRemoveItem = (itemId) => {
+    dispatch(deleteItem(itemId));
+  };
   
   return (
     <div className="md:col-span-2 space-y-4">
@@ -61,7 +85,7 @@ const LeftAddToCart = ({
                     </div>
                     
                     <motion.button 
-                      onClick={() => onRemoveItem(item.id)}
+                      onClick={() => handleRemoveItem(item.id)}
                       whileHover={{ scale: 1.2, color: "#ef4444" }}
                       whileTap={{ scale: 0.9 }}
                       className="text-gray-400 transition cursor-pointer"
@@ -74,7 +98,7 @@ const LeftAddToCart = ({
                   <div className="flex items-center justify-between mt-4">
                     <div className="flex items-center gap-3">
                       <motion.button 
-                        onClick={() => onDecreaseQty(item.id, item.quantity || 1)}
+                        onClick={() => handleDecreaseQty(item.id)}
                         whileHover={{ scale: 1.1, backgroundColor: "#e5e7eb" }}
                         whileTap={{ scale: 0.9 }}
                         className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center transition cursor-pointer shadow-inner"
@@ -92,7 +116,7 @@ const LeftAddToCart = ({
                       </motion.span>
                       
                       <motion.button 
-                        onClick={() => onIncreaseQty(item.id, item.quantity || 1)}
+                        onClick={() => handleIncreaseQty(item.id)}
                         whileHover={{ scale: 1.1, backgroundColor: "#e5e7eb" }}
                         whileTap={{ scale: 0.9 }}
                         className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center transition cursor-pointer shadow-inner"

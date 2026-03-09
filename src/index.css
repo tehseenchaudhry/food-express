@@ -1,12 +1,12 @@
 @import "tailwindcss";
 
 
-/* Progress bar - rose-800 */
+
 .Toastify__progress-bar--success {
-  background-color: #9f1239 !important; /* 👈 Progress bar bhi rose-800 */
+  background-color: #9f1239 !important; 
 }
 
-/* Progress bar animation - same color */
+
 .Toastify__progress-bar {
   background-color: #9f1239 !important;
 }

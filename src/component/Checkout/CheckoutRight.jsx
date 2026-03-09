@@ -1,14 +1,80 @@
 import React from "react";
 import { FaLock } from "react-icons/fa";
 import { motion } from "framer-motion";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { toast } from 'react-toastify';
+import { clearCart } from "../../reduxToolkit/features/cartSlice";
 
-const CheckoutRight = ({ 
-  cartItems, 
-  finalTotal, 
-  getItemPrice, 
-  getItemTotal,
-  onPlaceOrder 
-}) => {
+const CheckoutRight = ({ formData }) => {  
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const cartItems = useSelector((state) => state.cart?.items || []);
+
+  // Get item price from selected size
+  const getItemPrice = (item) => {
+    if (item.selectedSize?.price) {
+      return item.selectedSize.price;
+    }
+    return item.discountedPrice || item.price || 0;
+  };
+
+  // Get item total with quantity
+  const getItemTotal = (item) => {
+    const price = getItemPrice(item);
+    return price * (item.quantity || 1);
+  };
+
+  // Calculate subtotal
+  const subtotal = cartItems.reduce((total, item) => {
+    return total + getItemTotal(item);
+  }, 0);
+
+  const deliveryFee = 99;
+  const finalTotal = subtotal + deliveryFee;
+
+  const handlePlaceOrder = () => {
+    
+    if (!formData?.name || !formData?.email || !formData?.phone || !formData?.address || !formData?.city) {
+      toast.error("Please fill all fields!", {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
+      return;
+    }
+
+    // Cart empty check
+    if (cartItems.length === 0) {
+      toast.error("Your cart is empty!", {
+        position: "top-right",
+        autoClose: 1000,
+        theme: "colored",
+      });
+      return;
+    }
+
+    // Success flow
+    dispatch(clearCart());
+    
+    toast.success("Order placed successfully! 🎉", {
+      position: "top-right",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "colored",
+      onClose: () => navigate("/")
+    });
+  };
+
   return (
     <motion.div 
       className="md:col-span-1"
@@ -98,24 +164,24 @@ const CheckoutRight = ({
             <span className="text-gray-600">Subtotal</span>
             <motion.span 
               className="font-medium"
-              key={finalTotal}
+              key={subtotal}
               initial={{ scale: 1.2 }}
               animate={{ scale: 1 }}
               transition={{ type: "spring", stiffness: 300 }}
             >
-              Rs. {finalTotal.toLocaleString()}
+              Rs. {subtotal.toLocaleString()}
             </motion.span>
           </motion.div>
           
-          {/* Note: Delivery fee already included in AddToCart */}
           <motion.div 
-            className="text-xs text-gray-400 text-right"
+            className="flex justify-between text-sm"
             variants={{
-              hidden: { opacity: 0 },
-              visible: { opacity: 1 }
+              hidden: { opacity: 0, x: -20 },
+              visible: { opacity: 1, x: 0 }
             }}
           >
-            *Delivery fee already included
+            <span className="text-gray-600">Delivery Fee</span>
+            <span className="font-medium">Rs. {deliveryFee}</span>
           </motion.div>
 
           <motion.div 
@@ -140,7 +206,7 @@ const CheckoutRight = ({
 
         {/* Place Order Button */}
         <motion.button
-          onClick={onPlaceOrder}
+          onClick={handlePlaceOrder}
           className="w-full bg-rose-800 text-white py-3 rounded-lg font-medium hover:bg-rose-900 transition-all hover:scale-105 mt-4 shadow-md cursor-pointer"
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}

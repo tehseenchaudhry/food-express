@@ -2,11 +2,24 @@ import React, { useState } from "react";
 import { FaArrowRight } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
+import { useSelector } from "react-redux";
 
-const RightAddToCart = ({ finalTotal}) => {
+const RightAddToCart = () => {
+  const cartItems = useSelector((state) => state.cart.items);
   
   const [promoCode, setPromoCode] = useState("");
   const [promoApplied, setPromoApplied] = useState(false);
+
+  // Calculate totals 
+  const subtotal = cartItems.reduce((total, item) => {
+    // Handle items with size-based pricing
+    const currentSize = item.selectedSize || item.sizes?.[0] || { price: item.price };
+    const itemPrice = currentSize.price || item.price;
+    return total + (itemPrice * (item.quantity || 1));
+  }, 0);
+  
+  const deliveryFee = 99;
+  const finalTotal = subtotal + deliveryFee;
 
   const applyPromo = () => {
     if (promoCode.toUpperCase() === "SAVE10" && !promoApplied) {
@@ -59,12 +72,12 @@ const RightAddToCart = ({ finalTotal}) => {
             <span>Subtotal</span>
             <motion.span 
               className="font-semibold"
-              key={finalTotal}
+              key={subtotal}
               initial={{ scale: 1.2, color: "#9f1239" }}
               animate={{ scale: 1, color: "#4b5563" }}
               transition={{ type: "spring", stiffness: 300 }}
             >
-              Rs. {finalTotal.toLocaleString()}
+              Rs. {subtotal.toLocaleString()}
             </motion.span>
           </motion.div>
           
@@ -76,7 +89,7 @@ const RightAddToCart = ({ finalTotal}) => {
             }}
           >
             <span>Delivery Fee</span>
-            <span className="font-semibold">Rs. 99</span>
+            <span className="font-semibold">Rs. {deliveryFee}</span>
           </motion.div>
 
           <motion.div 

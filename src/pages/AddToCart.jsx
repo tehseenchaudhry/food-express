@@ -1,58 +1,12 @@
 import React from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { FaShoppingBag, FaArrowLeft } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import LeftAddToCart from "../component/addToCart/LeftAddToCart";
 import RightAddToCart from "../component/addToCart/RightAddToCart";
-import { removeCart, updateQuantity, updateSize } from "../reduxToolkit/features/cartSlice";
-
 
 const AddToCart = () => {
-  const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart.items);
-
-  // console.log(cartItems);
-  
-  
-  // Handle size change
-  const handleSizeChange = (itemId, size) => {
-    dispatch(updateSize({ id: itemId, size }));
-  };
-
-  // Get current size for item
-  const getCurrentSize = (item) => {
-    return item.selectedSize || item.sizes?.[0] || { name: "Regular", price: item.price };
-  };
-
-  // Calculate item price based on selected size
-  const getItemPrice = (item) => {
-    const currentSize = getCurrentSize(item);
-    return currentSize.price * (item.quantity || 1);
-  };
-
-  // Handle quantity increase
-  const increaseQty = (itemId, currentQty) => {
-    dispatch(updateQuantity({ id: itemId, quantity: currentQty + 1 }));
-  };
-
-  // Handle quantity decrease
-  const decreaseQty = (itemId, currentQty) => {
-    if (currentQty > 1) {
-      dispatch(updateQuantity({ id: itemId, quantity: currentQty - 1 }));
-    }
-  };
-
-  // Handle remove item
-  const handleRemoveItem = (itemId) => {
-    dispatch(removeCart(itemId)); 
-  };
-
-  // Calculate totals
-  const subtotal = cartItems.reduce((total, item) => {
-    return total + getItemPrice(item);
-  }, 0);
- const finalTotal = subtotal + 99;
-
 
   // Empty cart view
   if (cartItems.length === 0) {
@@ -95,21 +49,8 @@ const AddToCart = () => {
         </div>
 
         <div className="grid md:grid-cols-3 gap-6">
-          {/* Left Component - Cart Items */}
-          <LeftAddToCart 
-            cartItems={cartItems}
-            onSizeChange={handleSizeChange}
-            onIncreaseQty={increaseQty}
-            onDecreaseQty={decreaseQty}
-            onRemoveItem={handleRemoveItem}
-            getCurrentSize={getCurrentSize}
-            getItemPrice={getItemPrice}
-          />
-
-          {/* Right Component - Order Summary */}
-          <RightAddToCart 
-            finalTotal={finalTotal}
-          />
+          <LeftAddToCart />
+          <RightAddToCart /> 
         </div>
       </div>
     </div>
