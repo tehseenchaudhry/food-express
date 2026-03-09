@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import './App.css'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import Components from './component/common/Components'
@@ -21,9 +21,18 @@ import Customers from './Dashboard/dashboardPages/Customers'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
 import Checkout from './pages/Checkout'
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 function App() {
-  const [count, setCount] = useState(0)
+  // Initialize AOS
+    useEffect(() => {
+      AOS.init({
+        duration: 800,
+        once: true,
+        offset: 50,
+      });
+    }, []);
 
   return (
     <>

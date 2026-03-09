@@ -2,12 +2,11 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay } from 'swiper/modules';
+import { motion } from 'framer-motion';
 
 // Swiper styles
 import 'swiper/css';
-
 import 'swiper/css/autoplay';
-
 
 const categories = [
   { 
@@ -28,7 +27,7 @@ const categories = [
   { 
     id: 4, 
     name: 'Chicken Pieces', 
-   image: 'https://images.unsplash.com/photo-1598515214211-89d3c73ae83b?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80'
+    image: 'https://images.unsplash.com/photo-1598515214211-89d3c73ae83b?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80'
   },
   { 
     id: 5, 
@@ -49,23 +48,46 @@ const categories = [
 
 const Categories = () => {
   return (
-    <div className="py-20 px-4  overflow-hidden">
-      <div className="max-w-7xl mx-auto ">
+    <motion.div 
+      className="py-20 px-4 overflow-hidden"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.6 }}
+    >
+      <div className="max-w-7xl mx-auto">
 
         {/* Heading */}
-        <div className="text-center mb-16" data-aos="fade-left">
+        <motion.div 
+          className="text-center mb-16"
+          initial={{ opacity: 0, x: -50 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+        >
           <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
             Discover Food <span className="text-rose-800">Categories</span>
           </h2>
-          <p className="text-gray-600 max-w-3xl mx-auto text-lg">
+          <motion.p 
+            className="text-gray-600 max-w-3xl mx-auto text-lg"
+            initial={{ opacity: 0, x: -50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            viewport={{ once: true }}
+          >
             Explore our delicious collection of food categories.
-          </p>
-        </div>
+          </motion.p>
+        </motion.div>
 
         {/* Swiper */}
-        <div className="relative px-2 md:px-8 " data-aos="fade-left">
+        <motion.div 
+          className="relative px-2 md:px-8"
+          initial={{ opacity: 0, x: -50 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.6, delay: 0.3 }}
+          viewport={{ once: true }}
+        >
           <Swiper
-            modules={[ Autoplay]}
+            modules={[Autoplay]}
             spaceBetween={30}
             slidesPerView={1}
             autoplay={{ delay: 1000, disableOnInteraction: false }}
@@ -77,40 +99,56 @@ const Categories = () => {
               640: { slidesPerView: 3 },
               1024: { slidesPerView: 4 },
             }}
-            className=" pb-16"
+            className="pb-16"
           >
             {categories.map((category) => (
               <SwiperSlide key={category.id}>
-                <Link
-                  to="/menu"
-                  className="group block"
-                  data-aos="fade-left"
-                  data-aos-delay={category.id * 80}
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.4, delay: category.id * 0.05 }}
+                  viewport={{ once: true }}
+                  whileHover={{ y: -5 }}
                 >
-                  <div className="relative overflow-hidden rounded-3xl shadow-2xl hover:shadow-3xl transition-all duration-500  ">
-                    {/* Image */}
-                    <img
-                      src={category.image}
-                      alt={category.name}
-                      className="w-full h-64 object-cover group-hover:scale-110 transition duration-700 "
-                    />
-                    {/* Gradient Overlay */}
-                    <div className="absolute inset-0 bg-black/40  to-rose-800/20"></div>
-                    {/* Text */}
-                    <div className="absolute bottom-6 left-6 text-white ">
-                      <h3 className="text-3xl font-bold drop-shadow-lg">{category.name}</h3>
-                      
-                    </div>
-                  </div>
-                </Link>
+                  <Link
+                    to="/menu"
+                    className="group block"
+                  >
+                    <motion.div 
+                      className="relative overflow-hidden rounded-3xl shadow-2xl hover:shadow-3xl transition-all duration-500"
+                      whileHover={{ scale: 1.02 }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      {/* Image */}
+                      <motion.img
+                        src={category.image}
+                        alt={category.name}
+                        className="w-full h-64 object-cover"
+                        whileHover={{ scale: 1.1 }}
+                        transition={{ duration: 0.7 }}
+                      />
+                      {/* Gradient Overlay */}
+                      <div className="absolute inset-0 bg-black/40 to-rose-800/20"></div>
+                      {/* Text */}
+                      <motion.div 
+                        className="absolute bottom-6 left-6 text-white"
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.2 }}
+                        viewport={{ once: true }}
+                      >
+                        <h3 className="text-3xl font-bold drop-shadow-lg">{category.name}</h3>
+                      </motion.div>
+                    </motion.div>
+                  </Link>
+                </motion.div>
               </SwiperSlide>
             ))}
           </Swiper>
-        </div>
-
+        </motion.div>
 
       </div>
-    </div>
+    </motion.div>
   );
 };
 

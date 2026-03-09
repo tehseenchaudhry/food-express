@@ -1,14 +1,18 @@
-import React, { useState } from "react";
+import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { FaShoppingBag, FaArrowLeft } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import LeftAddToCart from "../component/addToCart/LeftAddToCart";
 import RightAddToCart from "../component/addToCart/RightAddToCart";
-// import { removeCart, updateQuantity, updateSize } from '../../reduxToolkit/features/cartSlice';
+import { removeCart, updateQuantity, updateSize } from "../reduxToolkit/features/cartSlice";
+
 
 const AddToCart = () => {
   const dispatch = useDispatch();
-  const cartItems = useSelector((state) => state.cart?.items || []);
+  const cartItems = useSelector((state) => state.cart.items);
+
+  // console.log(cartItems);
+  
   
   // Handle size change
   const handleSizeChange = (itemId, size) => {
@@ -40,16 +44,15 @@ const AddToCart = () => {
 
   // Handle remove item
   const handleRemoveItem = (itemId) => {
-    dispatch(removeCart(itemId));
+    dispatch(removeCart(itemId)); 
   };
 
   // Calculate totals
   const subtotal = cartItems.reduce((total, item) => {
     return total + getItemPrice(item);
   }, 0);
+ const finalTotal = subtotal + 99;
 
-  const deliveryFee = 99;
-  const total = subtotal + deliveryFee;
 
   // Empty cart view
   if (cartItems.length === 0) {
@@ -105,9 +108,7 @@ const AddToCart = () => {
 
           {/* Right Component - Order Summary */}
           <RightAddToCart 
-            subtotal={subtotal}
-            deliveryFee={deliveryFee}
-            total={total}
+            finalTotal={finalTotal}
           />
         </div>
       </div>

@@ -1,7 +1,6 @@
 import React from 'react';
 import CategoryFilter from '../component/Menu/CategoryFilter';
 import SortOptions from '../component/Menu/SortOptions';
-// import Pagination from '../component/menu/Pagination';
 import MenuCard from '../component/Menu/MenuCard';
 import MenuHero from '../component/Menu/MenuHero';
 import { useSelector } from 'react-redux';
@@ -37,8 +36,9 @@ const finalCards = sortby ==="low"
 ?[...filterCards].sort((a,b)=>b.price-a.price)
 :filterCards;
   return (
-    <main>
+    <main className='overflow-hidden'>
       <MenuHero />
+      <div className="flex flex-col lg:flex-row justify-between">
       <CategoryFilter />
 
       {/* Filters Bar */}
@@ -46,6 +46,7 @@ const finalCards = sortby ==="low"
         <div className="flex flex-wrap items-center px-4 justify-end gap-4">
           <SortOptions />
         </div>
+      </div>
       </div>
 
       {/* Menu Items Grid */}
@@ -58,15 +59,6 @@ const finalCards = sortby ==="low"
             ))}
           </div>
 
-          {/* Pagination */}
-          {/* {totalPages > 1 && (
-            <div className="flex justify-center mt-10">
-              <Pagination
-                currentPage={1}
-                totalPages={totalPages}
-              />
-            </div>
-          )} */}
         </div>
       </section>
     </main>

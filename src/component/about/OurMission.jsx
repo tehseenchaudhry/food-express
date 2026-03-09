@@ -47,22 +47,26 @@ const OurMission = () => {
           {items.map((item, index) => (
             <div
               key={index}
-              className="group relative  rounded-xl p-6 hover:shadow-xl transition-all overflow-hidden border border-rose-800"
+              data-aos="fade-up"
+              data-aos-delay={index * 100}
+              className="group relative rounded-xl p-6 hover:shadow-xl transition-all overflow-hidden border border-rose-800"
             >
-              {/* Hover Background - Neeche se upar ki tarf */}
+              {/* Hover Background */}
               <div className="absolute inset-x-0 bottom-0 h-0 bg-gradient-to-t from-rose-800 to-black group-hover:h-full transition-all duration-500"></div>
               
-              {/* Content - Relative z-index se background ke upar */}
+              {/* Content */}
               <div className="relative z-10">
                 {/* Icon */}
                 <div className="w-14 h-14 bg-rose-800 group-hover:bg-white/20 rounded-xl flex items-center justify-center mb-4 transition-colors">
                   {item.icon}
                 </div>
 
-                {/* Content */}
+                {/* Title */}
                 <h3 className="text-lg font-bold text-gray-900 group-hover:text-white mb-2 transition-colors">
                   {item.title}
                 </h3>
+                
+                {/* Description */}
                 <p className="text-sm text-gray-600 group-hover:text-white/90 leading-relaxed transition-colors">
                   {item.description}
                 </p>

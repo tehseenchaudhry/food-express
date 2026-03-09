@@ -1,13 +1,15 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { FaAngleLeft } from "react-icons/fa";
 import { toast } from 'react-toastify';
 import CheckoutLeft from "../component/Checkout/CheckoutLeft";
 import CheckoutRight from "../component/Checkout/CheckoutRight";
+import { clearCart } from "../reduxToolkit/features/cartSlice";
 
 const Checkout = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch()
   const cartItems = useSelector((state) => state.cart?.items || []);
 
   const [paymentMethod, setPaymentMethod] = useState("cod");
@@ -39,8 +41,8 @@ const Checkout = () => {
     return total + getItemTotal(item);
   }, 0);
 
-  const deliveryFee = 99;
-  const total = subtotal + deliveryFee;
+  // const deliveryFee = 99;
+  const finalTotal = subtotal + 99;
 
   const handleInputChange = (e) => {
     setFormData({
@@ -65,6 +67,8 @@ const Checkout = () => {
       return;
     }
 
+
+    dispatch(clearCart())
     // Success Toast for order placed
     toast.success("Order placed successfully! 🎉", {
       position: "top-right",
@@ -106,9 +110,7 @@ const Checkout = () => {
         {/* Right Side - Order Summary */}
         <CheckoutRight 
           cartItems={cartItems}
-          subtotal={subtotal}
-          deliveryFee={deliveryFee}
-          total={total}
+          finalTotal={finalTotal}
           getItemPrice={getItemPrice}
           getItemTotal={getItemTotal}
           onPlaceOrder={handlePlaceOrder}

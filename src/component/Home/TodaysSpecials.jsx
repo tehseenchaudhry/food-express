@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
 import { FaStar, FaShoppingCart } from "react-icons/fa";
-import { MdLocalOffer } from "react-icons/md";
+import { motion } from "framer-motion";
 
 const TodaysSpecials = () => {
   const [timeLeft, setTimeLeft] = useState({
@@ -104,64 +103,152 @@ const TodaysSpecials = () => {
   ];
 
   return (
-    <section className="py-20 lg:px-8 bg-gradient-to-b from-white to-rose-50 relative overflow-hidden">
+    <motion.section 
+      className="py-20 lg:px-8 bg-gradient-to-b from-white to-rose-50 relative overflow-hidden"
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      transition={{ duration: 0.6 }}
+      viewport={{ once: true }}
+    >
       <div className="max-w-7xl mx-auto px-4">
         {/* Section Header */}
-        <div className="text-center mb-16">
-          <span className="bg-rose-800 text-white font-semibold text-sm tracking-wide rounded-2xl py-1 px-4 uppercase inline-block mt-6">
+        <motion.div 
+          className="text-center mb-16"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+        >
+          <motion.span 
+            className="bg-rose-800 text-white font-semibold text-sm tracking-wide rounded-2xl py-1 px-4 uppercase inline-block mt-6"
+            initial={{ opacity: 0, scale: 0.8 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.4, delay: 0.1 }}
+            viewport={{ once: true }}
+          >
             Today's Specials
-          </span>
+          </motion.span>
 
-          <h2 className="text-4xl md:text-5xl font-bold text-black mt-4 mb-4">
+          <motion.h2 
+            className="text-4xl md:text-5xl font-bold text-black mt-4 mb-4"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            viewport={{ once: true }}
+          >
             Hot <span className="text-rose-800">Deals</span>
-          </h2>
+          </motion.h2>
 
-          <p className="text-gray-600 max-w-2xl mx-auto text-lg">
+          <motion.p 
+            className="text-gray-600 max-w-2xl mx-auto text-lg"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+            viewport={{ once: true }}
+          >
             Grab our most loved dishes before they run out!
-          </p>
+          </motion.p>
 
-          {/* Countdown Timer */}
-          {/* Timer */}
-        <div className="flex justify-center gap-4 mb-12">
-          <div className="text-center">
-            <div className="text-3xl font-bold text-rse-800">{timeLeft.hours || 0}</div>
-            <div className="text-xs text-gray-500">Hours</div>
-          </div>
-          <div className="text-3xl font-bold ">:</div>
-          <div className="text-center">
-            <div className="text-3xl font-bold">{timeLeft.minutes || 0}</div>
-            <div className="text-xs text-gray-500">Minutes</div>
-          </div>
-          <div className="text-3xl font-bold">:</div>
-          <div className="text-center">
-            <div className="text-3xl font-bold ">{timeLeft.seconds || 0}</div>
-            <div className="text-xs text-gray-500">Seconds</div>
-          </div>
-        </div>
-        </div>
+          {/* Countdown Timer - Original Code */}
+          <motion.div 
+            className="flex justify-center gap-4 mb-12"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.4 }}
+            viewport={{ once: true }}
+          >
+            <div className="text-center">
+              <motion.div 
+                className="text-3xl font-bold text-rose-800"
+                key={timeLeft.hours}
+                initial={{ scale: 1.2 }}
+                animate={{ scale: 1 }}
+                transition={{ type: "spring", stiffness: 300 }}
+              >
+                {timeLeft.hours || 0}
+              </motion.div>
+              <div className="text-xs text-gray-500">Hours</div>
+            </div>
+            
+            <motion.div 
+              className="text-3xl font-bold text-rose-800"
+              animate={{ opacity: [1, 0.5, 1] }}
+              transition={{ duration: 1, repeat: Infinity }}
+            >
+              :
+            </motion.div>
+            
+            <div className="text-center">
+              <motion.div 
+                className="text-3xl font-bold text-rose-800"
+                key={timeLeft.minutes}
+                initial={{ scale: 1.2 }}
+                animate={{ scale: 1 }}
+                transition={{ type: "spring", stiffness: 300 }}
+              >
+                {timeLeft.minutes || 0}
+              </motion.div>
+              <div className="text-xs text-gray-500">Minutes</div>
+            </div>
+            
+            <motion.div 
+              className="text-3xl font-bold text-rose-800"
+              animate={{ opacity: [1, 0.5, 1] }}
+              transition={{ duration: 1, repeat: Infinity }}
+            >
+              :
+            </motion.div>
+            
+            <div className="text-center">
+              <motion.div 
+                className="text-3xl font-bold text-rose-800"
+                key={timeLeft.seconds}
+                initial={{ scale: 1.2 }}
+                animate={{ scale: 1 }}
+                transition={{ type: "spring", stiffness: 300 }}
+              >
+                {timeLeft.seconds || 0}
+              </motion.div>
+              <div className="text-xs text-gray-500">Seconds</div>
+            </div>
+          </motion.div>
+        </motion.div>
 
         {/* Specials Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {specials.map((item) => (
-            <div
+          {specials.map((item, index) => (
+            <motion.div
               key={item.id}
-              className="group relative bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2"
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              viewport={{ once: true }}
+              whileHover={{ y: -8 }}
+              className="group relative bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500"
             >
               {/* Image */}
               <div className="relative h-64 overflow-hidden">
-                <img
+                <motion.img
                   src={item.image}
                   alt={item.name}
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                  className="w-full h-full object-cover"
+                  whileHover={{ scale: 1.1 }}
+                  transition={{ duration: 0.7 }}
                 />
 
                 {/* Gradient Overlay */}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
 
                 {/* Discount Badge */}
-                <div className="absolute top-4 left-4 bg-rose-600 text-white px-4 py-1.5 rounded-full text-sm font-bold shadow-lg">
+                <motion.div 
+                  className="absolute top-4 left-4 bg-rose-600 text-white px-4 py-1.5 rounded-full text-sm font-bold shadow-lg"
+                  initial={{ x: -100 }}
+                  whileInView={{ x: 0 }}
+                  transition={{ type: "spring", stiffness: 100, delay: index * 0.1 + 0.2 }}
+                  viewport={{ once: true }}
+                >
                   {item.discount}% OFF
-                </div>
+                </motion.div>
 
                 {/* Category */}
                 <div className="absolute bottom-4 left-4">
@@ -202,29 +289,23 @@ const TodaysSpecials = () => {
                     </span>
                   </div>
 
-                  <button className="w-12 h-12 bg-rose-800 rounded-2xl flex items-center justify-center text-white hover:bg-rose-900 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-110">
+                  <motion.button 
+                    className="w-12 h-12 bg-rose-800 rounded-2xl flex items-center justify-center text-white hover:bg-rose-900 transition-all duration-300 shadow-lg hover:shadow-xl"
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.9 }}
+                  >
                     <FaShoppingCart className="text-lg" />
-                  </button>
+                  </motion.button>
                 </div>
               </div>
 
               {/* Hover Border */}
               <div className="absolute inset-0 border-2 border-rose-800 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
-            </div>
+            </motion.div>
           ))}
         </div>
-
-        {/* View All Specials */}
-        {/* <div className="text-center mt-12">
-          <Link
-            to="/menu"
-            className="inline-flex items-center gap-2 px-8 py-3 bg-white text-rose-800 border-2 border-rose-800 rounded-full hover:bg-rose-800 hover:text-white transition-all duration-300 font-semibold group"
-          >
-            View All Specials
-          </Link>
-        </div> */}
       </div>
-    </section>
+    </motion.section>
   );
 };
 
