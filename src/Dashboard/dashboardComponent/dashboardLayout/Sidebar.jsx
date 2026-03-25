@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   FiHome,
   FiShoppingBag,
@@ -12,7 +12,20 @@ import { MdRestaurantMenu } from "react-icons/md";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 
 const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
-  const navigate = useNavigate();
+  const [user, setUser] = useState(null);
+  const navigate = useNavigate()
+  useEffect(() => {
+      const storedUser = JSON.parse(localStorage.getItem("signupData"));
+      if (storedUser) {
+        setUser(storedUser);
+      }
+    }, []);
+  const handleLogout = () => {
+    localStorage.removeItem("signupData");
+    setUser(null);
+     setSidebarOpen(false); 
+    navigate("/");
+  };
 
   const menuItems = [
     { icon: FiHome, label: "Dashboard", path: "/dashboard", end: true },
@@ -79,7 +92,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
         {/* Logout */}
         <div className="absolute bottom-0 left-0 right-0 px-3 py-2 bg-white/10  border-t border-rose-700">
           <button
-            onClick={() => navigate("/")}
+            onClick={handleLogout}
             className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-rose-100 hover:bg-white/30 w-full`}
           >
             <span className="text-sm font-medium">Logout</span>

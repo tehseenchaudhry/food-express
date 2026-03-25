@@ -76,7 +76,7 @@ function App() {
         pauseOnHover
         theme="colored"
         style={{ top: "60px" }} 
-           toastStyle={{ backgroundColor: 'white' , color: "#9f1239", border: '1px solid #9f1239', }}
+          //  toastStyle={{ backgroundColor: 'white' , color: "#9f1239", border: '1px solid #9f1239', }}
             // progressStyle={{ background: '#9f1239' }}
       />
       </BrowserRouter>
