@@ -1,27 +1,28 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { FaPaperPlane } from 'react-icons/fa';
 import { motion } from 'framer-motion';
+import emailjs from "@emailjs/browser";
+import { toast } from 'react-toastify';
 
 const ContactForm = () => {
-  const [formData, setFormData] = useState({
-    name: "",
-    phone: "",
-    address: "",
-    message: ""
-  });
-
-  const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
-  };
-
+  const ref = useRef();
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(formData);
-    alert("Message sent successfully!");
+
+    emailjs
+      .sendForm('service_7rulznn', 'template_nrqrtkb', ref.current, {
+        publicKey: 't1FY4jgpMfqsGVWS-',
+      })
+      .then(() => {
+        toast("Email sent successfully", { type: "success" });
+      })
+      .catch((err) => {
+        console.log("error", err);
+      });
   };
+  
+
+ 
 
   return (
     <div className="max-w-6xl mx-auto mt-20 overflow-x-hidden">
@@ -61,7 +62,7 @@ const ContactForm = () => {
         >
           <h3 className="text-2xl font-bold text-rose-800 mb-6">Send us a Message</h3>
           
-          <form onSubmit={handleSubmit} className="space-y-5">
+          <form ref={ref} onSubmit={handleSubmit}  className="space-y-5">
             
             {/* Name and Phone */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -72,8 +73,7 @@ const ContactForm = () => {
                 <input
                   type="text"
                   name="name"
-                  value={formData.name}
-                  onChange={handleChange}
+                  
                   placeholder="John Doe"
                   className="w-full p-3 border border-gray-300 rounded-xl focus:outline-none focus:border-rose-800 focus:ring-2 focus:ring-rose-200 transition"
                   required
@@ -87,8 +87,7 @@ const ContactForm = () => {
                 <input
                   type="tel"
                   name="phone"
-                  value={formData.phone}
-                  onChange={handleChange}
+                 
                   placeholder="03XX-XXXXXXX"
                   className="w-full p-3 border border-gray-300 rounded-xl focus:outline-none focus:border-rose-800 focus:ring-2 focus:ring-rose-200 transition"
                   required
@@ -104,8 +103,7 @@ const ContactForm = () => {
               <input
                 type="text"
                 name="address"
-                value={formData.address}
-                onChange={handleChange}
+               
                 placeholder="House #, Street, Area, City"
                 className="w-full p-3 border border-gray-300 rounded-xl focus:outline-none focus:border-rose-800 focus:ring-2 focus:ring-rose-200 transition"
                 required
@@ -120,8 +118,7 @@ const ContactForm = () => {
               <textarea
                 name="message"
                 rows="3"
-                value={formData.message}
-                onChange={handleChange}
+                
                 placeholder="Write your message here..."
                 className="w-full p-3 border border-gray-300 rounded-xl focus:outline-none focus:border-rose-800 focus:ring-2 focus:ring-rose-200 transition resize-none"
                 required
